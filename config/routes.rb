@@ -5,8 +5,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "articles#index"
-  
+
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
+  end
+
+  resource :cart, only: :show do
+    post 'add_item', to: 'carts#add_item'
+    delete 'remove_item/:id', to: 'carts#remove_item', as: 'remove_item'
   end
 end
